@@ -114,9 +114,9 @@ export default function PageEditorModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
-      <DialogContent className="sm:max-w-lg p-0 overflow-hidden">
+      <DialogContent className="sm:max-w-lg w-[calc(100%-1.5rem)] max-h-[90dvh] flex flex-col p-0 overflow-hidden rounded-2xl">
         {/* Header */}
-        <DialogHeader className="border-b border-border p-4 pb-3">
+        <DialogHeader className="border-b border-border p-3.5 pb-2.5 shrink-0">
           <div className="flex items-center gap-2">
             <Badge variant="secondary" className="font-bold text-xs">
               Trang {pageIndex + 1} / {totalPages}
@@ -128,10 +128,10 @@ export default function PageEditorModal({
           </DialogDescription>
         </DialogHeader>
 
-        {/* Main Image Preview Area */}
-        <div className="relative bg-muted/50 min-h-[260px] max-h-[45vh] p-4 flex items-center justify-center overflow-auto border-b border-border">
+        {/* Flexible Main Image Preview Area */}
+        <div className="flex-1 min-h-0 bg-muted/40 p-3 flex items-center justify-center overflow-hidden border-b border-border">
           {isProcessing ? (
-            <div className="flex flex-col items-center gap-2 text-primary">
+            <div className="flex flex-col items-center gap-2 text-primary p-6">
               <Loader2 className="w-8 h-8 animate-spin" />
               <span className="text-xs font-semibold text-muted-foreground">Đang xử lý bộ lọc...</span>
             </div>
@@ -140,13 +140,13 @@ export default function PageEditorModal({
             <img
               src={previewUrl || page.processedDataUrl}
               alt={`Trang ${pageIndex + 1}`}
-              className="max-h-[40vh] max-w-full object-contain rounded-lg shadow-sm border border-border transition-all duration-200"
+              className="max-h-[42dvh] max-w-full h-auto w-auto object-contain rounded-lg shadow-sm border border-border transition-all duration-200"
             />
           )}
         </div>
 
         {/* Toolbar & Filters */}
-        <div className="p-4 space-y-3 bg-background">
+        <div className="p-3.5 space-y-3 bg-background shrink-0">
           {/* Rotate & Delete Controls */}
           <div className="flex items-center justify-between pb-1">
             <div className="flex items-center gap-1.5">
@@ -189,7 +189,7 @@ export default function PageEditorModal({
             <label className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider block">
               Bộ lọc tài liệu:
             </label>
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
               {filterOptions.map((opt) => (
                 <Button
                   key={opt.id}
